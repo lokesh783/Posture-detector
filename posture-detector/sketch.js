@@ -8,22 +8,19 @@ let actor_img;
 let specs,smoke;
 
 function setup() {
-    createCanvas(800, 500);
+    createCanvas(840, 500);
     capture = createCapture(VIDEO)
     capture.hide();
 
     posenet = ml5.poseNet(capture, modelLoaded);
     posenet.on('pose',receivedPoses);
 
-    actor_img = loadImage('images/shahrukh.png');
-    specs = loadImage('images/spects.png');
-    smoke = loadImage('images/cigar.png');
-
+    actor_img = loadImage('images/srk.png');
+    fb = loadImage('images/fb.png');
+    bat = loadImage('images/bat.png');
 }
 
 function receivedPoses(poses){
-    console.log(poses);
-
     if(poses.length > 0){
         singlePose = poses[0].pose;
         skeleton = poses[0].skeleton;
@@ -35,8 +32,6 @@ function modelLoaded() {
 }
 
 function draw() {
-
-    // images and videos(webcam)
     image(capture, 0, 0);
     fill(255,0,0);
 
@@ -49,13 +44,5 @@ function draw() {
         for(let j=0; j<skeleton.length; j++){
             line(skeleton[j][0].position.x, skeleton[j][0].position.y, skeleton[j][1].position.x, skeleton[j][1].position.y)
         }
-
-        //image(specs,singlePose.nose.x-35,singlePose.nose.y-50,80,80);
-        //image(smoke,singlePose.nose.x-35,singlePose.nose.y+10,40,40);
-
-        
     }
-
-    
-
 }
